@@ -1,5 +1,5 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Card } from '@/components/ui/card'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { getPostData, getAllPostIds } from '@/lib/posts'
@@ -23,19 +23,19 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const postData = await getPostData(params.slug)
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-8">
+    <Card className="w-full max-w-4xl mx-auto px-4 py-8 my-4">
       <Link href="/posts" className="flex items-center text-muted-foreground hover:text-foreground mb-6">
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to all posts
       </Link>
       <article className="prose dark:prose-invert max-w-none">
-        <h1>{postData.title}</h1>
+        <h1 className='text-3xl font-bold mb-4'>{postData.title}</h1>
         <div className="flex justify-between items-center mb-6">
           <Badge variant="secondary">{postData.category}</Badge>
           <span className="text-sm text-muted-foreground">{postData.date}</span>
         </div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
-    </div>
+    </Card>
   )
 }
